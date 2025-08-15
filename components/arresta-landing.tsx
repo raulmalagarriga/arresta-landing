@@ -10,7 +10,7 @@ const variants = {
 }
 
 const glow =
-  "before:absolute before:-inset-8 before:rounded-[32px] before:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.18),transparent_60%)] before:blur-2xl before:content-['']"
+  "before:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.18),transparent_60%)] before:blur-2xl before:content-['']"
 
 const I18N = {
   es: {
@@ -200,8 +200,8 @@ export default function ArrestaLandingLight() {
     <main className="min-h-screen scroll-smooth bg-[radial-gradient(1200px_600px_at_0%_0%,rgba(59,130,246,0.10),transparent_60%),radial-gradient(1200px_600px_at_100%_20%,rgba(59,130,246,0.06),transparent_60%),linear-gradient(to_bottom,#ffffff,#f8fafc)] text-slate-900">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
-          <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="group flex items-center gap-3">
-            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-9 w-auto" />
+          <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="group flex items-center gap-3 h-14">
+            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-auto w-32" />
             <span className="text-sm tracking-wider text-slate-500">{t("brand_tag")}</span>
           </a>
           <div className="flex items-center gap-3">
@@ -424,7 +424,7 @@ export default function ArrestaLandingLight() {
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-xs text-slate-500">
           <div className="flex items-center gap-3">
-            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-6 w-auto" />
+            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-24 w-auto" />
             <span>© {new Date().getFullYear()} Arresta Inc.</span>
           </div>
           <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="hover:text-slate-700">
