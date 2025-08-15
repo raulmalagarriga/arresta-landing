@@ -10,7 +10,7 @@ const variants = {
 }
 
 const glow =
-  "before:absolute before:-inset-8 before:rounded-[32px] before:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.18),transparent_60%)] before:blur-2xl before:content-['']"
+  "before:bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.18),transparent_60%)] before:blur-2xl before:content-['']"
 
 const I18N = {
   es: {
@@ -109,7 +109,17 @@ const I18N = {
   },
 }
 
-const Feature = ({ icon: Icon, title, children, index }) => (
+const Feature = ({
+  icon: Icon,
+  title,
+  children,
+  index,
+}: {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  children: React.ReactNode
+  index: number
+}) => (
   <motion.div
     className={`relative ${glow} overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm`}
     initial="hidden"
@@ -128,7 +138,17 @@ const Feature = ({ icon: Icon, title, children, index }) => (
   </motion.div>
 )
 
-const SmartImage = ({ src, alt, className, note }) => {
+const SmartImage = ({
+  src,
+  alt,
+  className,
+  note,
+}: {
+  src: string
+  alt: string
+  className?: string
+  note: string
+}) => {
   const [ok, setOk] = useState(true)
   return ok ? (
     <img src={src || "/placeholder.svg"} alt={alt} className={className} onError={() => setOk(false)} />
@@ -142,7 +162,7 @@ const SmartImage = ({ src, alt, className, note }) => {
 }
 
 export default function ArrestaLandingLight() {
-  const [lang, setLang] = useState("es")
+  const [lang, setLang] = useState<"es" | "en">("es")
 
   useEffect(() => {
     const saved = typeof window !== "undefined" ? localStorage.getItem("arresta_lang") : null
@@ -150,9 +170,12 @@ export default function ArrestaLandingLight() {
     else if (typeof navigator !== "undefined" && navigator.language?.startsWith("en")) setLang("en")
   }, [])
 
-  const t = (k) => I18N[lang][k]
+  const t = (k: keyof typeof I18N["en"]) => I18N[lang][k]
 
-  const handleSmooth = (e, id) => {
+  const handleSmooth = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | null,
+    id: string,
+  ) => {
     if (e) e.preventDefault()
     const el = document.getElementById(id)
     if (!el) return
@@ -165,8 +188,8 @@ export default function ArrestaLandingLight() {
     } catch {}
   }
 
-  const onLangChange = (e) => {
-    const v = e.target.value
+  const onLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const v = e.target.value as "es" | "en"
     setLang(v)
     try {
       localStorage.setItem("arresta_lang", v)
@@ -177,8 +200,8 @@ export default function ArrestaLandingLight() {
     <main className="min-h-screen scroll-smooth bg-[radial-gradient(1200px_600px_at_0%_0%,rgba(59,130,246,0.10),transparent_60%),radial-gradient(1200px_600px_at_100%_20%,rgba(59,130,246,0.06),transparent_60%),linear-gradient(to_bottom,#ffffff,#f8fafc)] text-slate-900">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
-          <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="group flex items-center gap-3">
-            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-9 w-auto" />
+          <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="group flex items-center gap-3 h-14">
+            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-auto w-32" />
             <span className="text-sm tracking-wider text-slate-500">{t("brand_tag")}</span>
           </a>
           <div className="flex items-center gap-3">
@@ -401,7 +424,7 @@ export default function ArrestaLandingLight() {
       <footer className="border-t border-slate-200 bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8 text-xs text-slate-500">
           <div className="flex items-center gap-3">
-            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-6 w-auto" />
+            <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-24 w-auto" />
             <span>© {new Date().getFullYear()} Arresta Inc.</span>
           </div>
           <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="hover:text-slate-700">
