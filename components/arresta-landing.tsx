@@ -109,7 +109,17 @@ const I18N = {
   },
 }
 
-const Feature = ({ icon: Icon, title, children, index }) => (
+const Feature = ({
+  icon: Icon,
+  title,
+  children,
+  index,
+}: {
+  icon: React.ComponentType<{ className?: string }>
+  title: string
+  children: React.ReactNode
+  index: number
+}) => (
   <motion.div
     className={`relative ${glow} overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm`}
     initial="hidden"
@@ -128,7 +138,17 @@ const Feature = ({ icon: Icon, title, children, index }) => (
   </motion.div>
 )
 
-const SmartImage = ({ src, alt, className, note }) => {
+const SmartImage = ({
+  src,
+  alt,
+  className,
+  note,
+}: {
+  src: string
+  alt: string
+  className?: string
+  note: string
+}) => {
   const [ok, setOk] = useState(true)
   return ok ? (
     <img src={src || "/placeholder.svg"} alt={alt} className={className} onError={() => setOk(false)} />
@@ -142,7 +162,7 @@ const SmartImage = ({ src, alt, className, note }) => {
 }
 
 export default function ArrestaLandingLight() {
-  const [lang, setLang] = useState("es")
+  const [lang, setLang] = useState<"es" | "en">("es")
 
   useEffect(() => {
     const saved = typeof window !== "undefined" ? localStorage.getItem("arresta_lang") : null
@@ -150,9 +170,12 @@ export default function ArrestaLandingLight() {
     else if (typeof navigator !== "undefined" && navigator.language?.startsWith("en")) setLang("en")
   }, [])
 
-  const t = (k) => I18N[lang][k]
+  const t = (k: keyof typeof I18N["en"]) => I18N[lang][k]
 
-  const handleSmooth = (e, id) => {
+  const handleSmooth = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent> | null,
+    id: string,
+  ) => {
     if (e) e.preventDefault()
     const el = document.getElementById(id)
     if (!el) return
@@ -165,8 +188,8 @@ export default function ArrestaLandingLight() {
     } catch {}
   }
 
-  const onLangChange = (e) => {
-    const v = e.target.value
+  const onLangChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const v = e.target.value as "es" | "en"
     setLang(v)
     try {
       localStorage.setItem("arresta_lang", v)
