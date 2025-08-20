@@ -202,7 +202,7 @@ export default function ArrestaLandingLight() {
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-6 py-3">
           <a href="#inicio" onClick={(e) => handleSmooth(e, "inicio")} className="group flex items-center gap-3 h-14">
             <SmartImage src="/ArrestaLogo1.png" alt={t("alt_logo")} note={t("image_hint")} className="h-auto w-32" />
-            <span className="text-sm tracking-wider text-slate-500">{t("brand_tag")}</span>
+            <span className="hidden md:flex text-sm tracking-wider text-slate-500">{t("brand_tag")}</span>
           </a>
           <div className="flex items-center gap-3">
             <label className="sr-only" htmlFor="langSelect">
@@ -389,7 +389,7 @@ export default function ArrestaLandingLight() {
             viewport={{ once: true }}
             variants={variants}
           >
-            <div className={`col-span-2 ${glow} rounded-2xl border border-slate-200 bg-white p-6 shadow-sm`}>
+            <div className={`md:col-span-2 ${glow} rounded-2xl border border-slate-200 bg-white p-6 shadow-sm`}>
               <p className="text-sm text-slate-600">{t("contact_body")}</p>
               <a
                 href={`mailto:ventas@arrestainc.com?subject=${encodeURIComponent(t("mailto_subject"))}`}
