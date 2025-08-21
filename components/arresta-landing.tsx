@@ -281,7 +281,7 @@ export default function ArrestaLandingLight() {
           >
             <div className={`relative ${glow} rounded-3xl border border-slate-200 bg-white p-4 shadow-sm`}>
               <SmartImage
-                src="/llave.jpeg"
+                src="/llave.png"
                 alt={t("alt_product")}
                 note={t("image_hint")}
                 className="mx-auto h-[420px] w-auto select-none object-contain"
